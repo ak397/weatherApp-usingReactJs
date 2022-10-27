@@ -55,7 +55,7 @@ const CopyWeatherUpdate = () => {
     return `${new Date(timeStamp * 1000).getHours()} : ${new Date(timeStamp * 1000).getMinutes()}`
   }
 
-  const isDay = response.weather?.icon?.includes("d")
+  // const isDay = response.weather?.icon?.includes("d")
 
   const toDate = () => {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Nocvember", "December"]
@@ -87,11 +87,11 @@ const CopyWeatherUpdate = () => {
 
   const handleCelciusClick = () => {
     setUnits("metric")
-    // setTempUnit("C")
-    // setTempUnit("C")
+    setTempUnit("C")
   }
   const handleFarehniteClick = () => {
     setUnits("imperial")
+    setTempUnit("F")
   }
 
   useEffect(() => {
@@ -107,7 +107,7 @@ const CopyWeatherUpdate = () => {
     <>
       <div className="">
         <div ref={bgMain} className="dark:bg-black main w-[90vw] h-[75vh] xsm:w-[70vw] p-2 flex items-center flex-col  m-auto my-2 rounded-md lg:h-[90vh] lg:w-[90vw] bg-gradient-to-br from-cyan-300 to bg-cyan-500">
-          <h1 className="text-xl lg:text-3xl font-bold mt-1.5 ">
+          <h1 className="text-xl lg:text-4xl font-bold mt-1.5 ">
             Weather App<i className="fa-solid fa-cloud-sun"></i>
           </h1>
           <div className="space-x-2">
@@ -130,11 +130,11 @@ const CopyWeatherUpdate = () => {
               <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Night Mode</span>
             </label>
             <div className="inline-block ease-out transition hover:scale-125 cursor-pointer" onClick={handleCelciusClick}>
-            °C
+              °C
             </div>
             <span> | </span>
             <span className="inline-block ease-out transition hover:scale-125 cursor-pointer" onClick={handleFarehniteClick}>
-            °F
+              °F
             </span>
           </div>
 
@@ -158,18 +158,37 @@ const CopyWeatherUpdate = () => {
                 {/* <span className="text-[14px]">{formatToLocalTime(response.dummy.list[0].dt,response.dummy.timezone)}</span> */}
               </div>
               <div className="flex justify-between items-center text-[14px] mt-[-55px]">
-                <span className="text-[28px] font-normal mr-[3px] mb-[5px] ">{response.weather.main.temp.toFixed()}°C</span>|<span className="text-[14px] mt-[5px] ml-[5px]">{response.weather.weather[0].description}</span>
+                <span className="text-[28px] font-normal mr-[3px] mb-[5px] ">
+                  {response.weather.main.temp.toFixed()}°{tempUnit}
+                </span>
+                |<span className="text-[14px] mt-[5px] ml-[5px]">{response.weather.weather[0].description}</span>
                 <img className="h-24 w-24 my-7 mx-auto" src={`https://openweathermap.org/img/wn/${response.weather.weather[0].icon}@2x.png`} alt="" srcSet="" />
               </div>
 
               <div className="font-bold text-lg mt-[-43px]">Weather Info</div>
-              <div className="outerDiv flex flex-row space-x-2 mt-3">
+              <div className="outerDiv flex flex-row space-x-2 mt-[-11px]">
                 {/* <div className="weatherinfoContainer flex w-11/12 justify-evenly items-center mt-[-25px] "> safe code*/}
-
+                {/* 
                 <div className="flex flex-row justify-evenly items-center text-sm my-1 mx-2">
                   <img className="h-9 w-9" src="/icons/temp.svg" alt="" srcSet="" />
                   <span className="flex flex-col m-4 text-[14px]">
                     {getTime(response.weather.sys[isDay ? "sunset" : "sunrise"])}
+                    <span>Sunset</span>
+                  </span>
+                </div> */}
+
+                <div className="flex flex-row justify-evenly items-center text-sm my-1 mx-2">
+                  <img className="h-9 w-9" src="/icons/sunrise.svg" alt="" srcSet="" />
+                  <span className="flex flex-col m-4 text-[14px]">
+                    {getTime(response.weather.sys.sunrise)}
+                    <span>Sunrise</span>
+                  </span>
+                </div>
+
+                <div className="flex flex-row justify-evenly items-center text-sm my-1 mx-2">
+                  <img className="h-9 w-9" src="/icons/sunset.svg" alt="" srcSet="" />
+                  <span className="flex flex-col m-4 text-[14px]">
+                    {getTime(response.weather.sys.sunset)}
                     <span>Sunset</span>
                   </span>
                 </div>
@@ -206,7 +225,9 @@ const CopyWeatherUpdate = () => {
                       <div className="flex flex-row items-center justify-center mt-[-10px]">
                         <img className="h-20 w-20  mx-auto" src={`https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png`} alt="" srcSet="" />
                         <div className="flex flex-col ">
-                          <p className="text-[14px]">{element.main.temp.toFixed()}°C</p>
+                          <p className="text-[14px]">
+                            {element.main.temp.toFixed()}°{tempUnit}
+                          </p>
                           <p className="text-[14px]">{element.weather[0].description}</p>
                         </div>
                       </div>
@@ -217,13 +238,15 @@ const CopyWeatherUpdate = () => {
 
               <div className="font-bold text-lg mt-[-15px]">Weather Forecast</div>
 
-              <div className="outerDiv flex flex-row space-x-2 mt-3">
+              <div className="outerDiv flex flex-row space-x-2 mt-2">
                 <div className="flex flex-col justify-center items-center">
                   <span className="text-sm font-medium">{dummyToDay()}</span>
                   <div className="flex flex-row items-center justify-center mt-[-10px]">
                     <img className="h-20 w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[7].weather[0].icon}@2x.png`} alt="" srcSet="" />
                     <div className="flex flex-col ">
-                      <p className="text-[14px]">{response.forecast.list[7].main.temp.toFixed()}°C</p>
+                      <p className="text-[14px]">
+                        {response.forecast.list[7].main.temp.toFixed()}°{tempUnit}
+                      </p>
                       <p className="text-[14px]">{response.forecast.list[7].weather[0].description}</p>
                     </div>
                   </div>
@@ -234,7 +257,9 @@ const CopyWeatherUpdate = () => {
                   <div className="flex flex-row items-center justify-center mt-[-10px]">
                     <img className="h-20 w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[15].weather[0].icon}@2x.png`} alt="" srcSet="" />
                     <div className="flex flex-col">
-                      <p className="text-[14px]">{response.forecast.list[15].main.temp.toFixed()}°C</p>
+                      <p className="text-[14px]">
+                        {response.forecast.list[15].main.temp.toFixed()}°{tempUnit}
+                      </p>
                       <p className="text-[14px]">{response.forecast.list[15].weather[0].description}</p>
                     </div>
                   </div>
@@ -245,7 +270,9 @@ const CopyWeatherUpdate = () => {
                   <div className="flex flex-row items-center justify-center mt-[-10px]">
                     <img className="h-20 w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[23].weather[0].icon}@2x.png`} alt="" srcSet="" />
                     <div className="flex flex-col">
-                      <p className="text-[14px]">{response.forecast.list[23].main.temp.toFixed()}°C</p>
+                      <p className="text-[14px]">
+                        {response.forecast.list[23].main.temp.toFixed()}°{tempUnit}
+                      </p>
                       <p className="text-[14px]">{response.forecast.list[23].weather[0].description}</p>
                     </div>
                   </div>
@@ -256,7 +283,9 @@ const CopyWeatherUpdate = () => {
                   <div className="flex flex-row items-center justify-center mt-[-10px]">
                     <img className="h-20 w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[31].weather[0].icon}@2x.png`} alt="" srcSet="" />
                     <div className="flex flex-col">
-                      <p className="text-[14px]">{response.forecast.list[31].main.temp.toFixed()}°C</p>
+                      <p className="text-[14px]">
+                        {response.forecast.list[31].main.temp.toFixed()}°{tempUnit}
+                      </p>
                       <p className="text-[14px]">{response.forecast.list[31].weather[0].description}</p>
                     </div>
                   </div>
@@ -267,7 +296,9 @@ const CopyWeatherUpdate = () => {
                   <div className="flex flex-row items-center justify-center mt-[-10px]">
                     <img className="h-20 w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[39].weather[0].icon}@2x.png`} alt="" srcSet="" />
                     <div className="flex flex-col">
-                      <p className="text-[14px]">{response.forecast.list[39].main.temp.toFixed()}°C</p>
+                      <p className="text-[14px]">
+                        {response.forecast.list[39].main.temp.toFixed()}°{tempUnit}
+                      </p>
                       <p className="text-[14px]">{response.forecast.list[39].weather[0].description}</p>
                     </div>
                   </div>
