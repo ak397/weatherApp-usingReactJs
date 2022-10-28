@@ -105,13 +105,13 @@ const CopyWeatherUpdate = () => {
   return (
     <>
       <div className="">
-        <div ref={bgMain} className="dark:bg-black main w-[90vw] h-[75vh] xsm:w-[90vw] p-2 flex items-center flex-col  m-auto my-2 rounded-md lg:h-[90vh] lg:w-[60vw] bg-gradient-to-br from-cyan-300 to bg-cyan-500">
-          <h1 className="text-xl lg:text-4xl font-bold mt-1.5 ">
+        <div ref={bgMain} className="dark:bg-black dark:text-white main w-[90vw] h-[75vh] xsm:w-[90vw] p-2 flex items-center flex-col  m-auto my-2 rounded-md lg:h-[90vh] lg:w-[60vw] bg-gradient-to-br from-cyan-300 to bg-cyan-500">
+          <h1 className="text-xl lg:text-4xl font-bold mt-1.5">
             Weather App<i className="fa-solid fa-cloud-sun"></i>
           </h1>
           <div className="space-x-1 lg:space-x-2">
             <input
-              className="p-2 mt-2 text-center rounded-2xl w-24 text-xs lg:w-48 lg:text-sm focus:outline-none"
+              className="dark:text-black p-2 mt-2 text-center rounded-2xl w-24 text-xs lg:w-48 lg:text-sm focus:outline-none"
               type="text"
               name="search"
               value={search}
@@ -197,7 +197,7 @@ const CopyWeatherUpdate = () => {
                   </span>
                 </div>
 
-                <div className="flex flex-row items-center  space-x-1 justify-center lg:mt-[-10px]">
+                <div className="flex flex-row items-center  space-x-1 justify-center ">
                   <img className="mx-auto h-4 w-4 lg:h-9 lg:w-9" src="/icons/sunset.svg" alt="" srcSet="" />
                   <span className="flex flex-col text-[10px] lg:text-[14px]">
                     {getTime(response.weather.sys.sunset)}
@@ -205,21 +205,21 @@ const CopyWeatherUpdate = () => {
                   </span>
                 </div>
 
-                <div className="flex flex-row items-center  space-x-1 justify-center lg:mt-[-10px]">
+                <div className="flex flex-row items-center  space-x-1 justify-center ">
                   <img className="mx-auto h-4 w-4 lg:h-9 lg:w-9" src="/icons/humidity.svg" alt="" srcSet="" />
                   <span className="flex flex-col  text-[10px] lg:text-[14px]">
                     {response.weather.main.humidity}% <span>Humidity</span>
                   </span>
                 </div>
 
-                <div className="flex flex-row items-center  space-x-1 justify-center lg:mt-[-10px]">
+                <div className="flex flex-row items-center  space-x-1 justify-center">
                   <img className="mx-auto h-4 w-4 lg:h-9 lg:w-9" src="/icons/wind.svg" alt="" srcSet="" />
                   <span className="flex flex-col  text-[10px] lg:text-[14px]">
                     {response.weather.wind.speed}Km/h <span>Speed</span>
                   </span>
                 </div>
 
-                <div className="flex flex-row items-center  space-x-1 justify-center lg:mt-[-10px]">
+                <div className="flex flex-row items-center  space-x-1 justify-center ">
                   <img className="mx-auto h-4 w-4 lg:h-9 lg:w-9" src="/icons/pressure.svg" alt="" srcSet="" />
                   <span className="flex flex-col text-[10px] lg:text-[14px]">
                     {response.weather.main.pressure} <span>Pressure</span>
