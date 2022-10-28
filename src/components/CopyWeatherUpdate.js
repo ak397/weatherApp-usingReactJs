@@ -4,9 +4,8 @@ import Spinner from "./Spinner"
 import { DateTime } from "luxon"
 
 const CopyWeatherUpdate = () => {
-  const [search, setSearch] = useState("") //safe
-  const [searchInput, setSearchInput] = useState("") //safe
-  //   const [search, setSearch] = useState("delhi")
+  const [search, setSearch] = useState("")
+  const [searchInput, setSearchInput] = useState("")
   const [response, setResponse] = useState({
     error: false,
     loading: false,
@@ -106,7 +105,7 @@ const CopyWeatherUpdate = () => {
   return (
     <>
       <div className="">
-        <div ref={bgMain} className="dark:bg-black main w-[90vw] h-[75vh] xsm:w-[70vw] p-2 flex items-center flex-col  m-auto my-2 rounded-md lg:h-[90vh] lg:w-[90vw] bg-gradient-to-br from-cyan-300 to bg-cyan-500">
+        <div ref={bgMain} className="dark:bg-black main w-[90vw] h-[75vh] xsm:w-[90vw] p-2 flex items-center flex-col  m-auto my-2 rounded-md lg:h-[90vh] lg:w-[60vw] bg-gradient-to-br from-cyan-300 to bg-cyan-500">
           <h1 className="text-xl lg:text-4xl font-bold mt-1.5 ">
             Weather App<i className="fa-solid fa-cloud-sun"></i>
           </h1>
@@ -163,6 +162,11 @@ const CopyWeatherUpdate = () => {
                 </span>
                 |<span className="text-[14px] mt-[5px] ml-[5px]">{response.weather.weather[0].description}</span>
                 <img className="h-24 w-24 my-7 mx-auto" src={`https://openweathermap.org/img/wn/${response.weather.weather[0].icon}@2x.png`} alt="" srcSet="" />
+                <div className="flex flex-col ml-24 text-[12px] font-medium">
+                  <div>Feels Like :- {response.weather.main.feels_like.toFixed()}°{tempUnit}</div>
+                  <div>Min Temp :- {response.weather.main.temp_min.toFixed()}°{tempUnit}</div>
+                  <div>Max Temp :- {response.weather.main.temp_max.toFixed()}°{tempUnit}</div>
+                </div>
               </div>
 
               <div className="font-bold text-lg mt-[-43px]">Weather Info</div>
