@@ -1,34 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@500&display=swap');
-body{
-    /* background: linear-gradient(papayawhip, white); */
-    background: linear-gradient(rgb(206, 246, 249), white);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* font-family: 'Baloo Bhai 2', cursive; */
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@500&display=swap");
+/* import google font through import method */
+body {
+  /* background: linear-gradient(papayawhip, white); */
+  background: linear-gradient(rgb(206, 246, 249), white);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* font-family: 'Baloo Bhai 2', cursive; */
 }
-.main{
-    box-shadow: 0 3px 6px 0 #555;
-    font-family: 'Montserrat', sans-serif;
-    /* font-family: 'Baloo Bhai 2', cursive; */
-    /* background: linear-gradient(rgb(131, 245, 253), white); */
-    /* background: radial-gradient(red blue green)  */
-    background-color: white;
+.main {
+  box-shadow: 0 3px 6px 0 #555;
+  font-family: "Montserrat", sans-serif;
+  /* font-family: 'Baloo Bhai 2', cursive; */
+  /* background: linear-gradient(rgb(131, 245, 253), white); */
+  /* background: radial-gradient(red blue green)  */
+  background-color: white;
 }
-/* .weatherinfoContainer{
-    flex-flow: row wrap;
-} */
-.input{
-    /* background: linear-gradient(rgb(131, 245, 253), white); */
-    /* background-color: aliceblue; */
-    /* font-weight: 500;
-    color: black;
-    border: solid black 2px; */
+.btn {
+  background: linear-gradient(rgb(131, 245, 253), white);
+  color: black;
 }
-.btn{
-    background: linear-gradient(rgb(131, 245, 253), white);;
-    color: black;
-}
-
-
