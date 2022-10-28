@@ -16,9 +16,9 @@ body{
     /* background: radial-gradient(red blue green)  */
     background-color: white;
 }
-.weatherinfoContainer{
+/* .weatherinfoContainer{
     flex-flow: row wrap;
-}
+} */
 .input{
     /* background: linear-gradient(rgb(131, 245, 253), white); */
     /* background-color: aliceblue; */
