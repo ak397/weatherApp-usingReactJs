@@ -1,5 +1,6 @@
 import "./App.css"
 import CopyWeatherUpdate from "./components/CopyWeatherUpdate"
+import { MadeWithLove } from "./components/MadeWithLove"
 // import WeatherUpdate from "./components/WeatherUpdate";//main code work
 
 // import HourlyUpdate from "./components/HourlyUpdate";
@@ -12,6 +13,7 @@ const App = () => {
       {/* <HourlyUpdate/> */}
       {/* <Dummy/> */}
       <CopyWeatherUpdate />
+      <MadeWithLove/>
     </>
   )
 }

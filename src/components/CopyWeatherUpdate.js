@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { useState, useRef, useEffect } from "react"
 import Spinner from "./Spinner"
 import { DateTime } from "luxon"
+import { MadeWithLove } from "./MadeWithLove"
 
 const CopyWeatherUpdate = () => {
   const [search, setSearch] = useState("")
