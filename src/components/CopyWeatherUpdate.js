@@ -54,8 +54,6 @@ const CopyWeatherUpdate = () => {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Nocvember", "December"]
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const currentDate = new Date()
-    // let currentMinutes=currentDate.getMinutes()<10? "0": "" + currentMinutes;
-    // ${currentDate.getMinutes()
 
     const date = `${days[currentDate.getDay()]} ${currentDate.getDate()} ${months[currentDate.getMonth()]}, ${currentDate.getHours()} : ${(currentDate.getMinutes()<10?"0" + currentDate.getMinutes() :currentDate.getMinutes()) } `
     return date
@@ -92,12 +90,12 @@ const CopyWeatherUpdate = () => {
     <>
       <div className="">
         <div  className="dark:bg-black dark:text-white main w-[90vw] h-[75vh] xsm:w-[90vw] p-2 flex items-center flex-col  m-auto my-2 rounded-md lg:h-[90vh] lg:w-[60vw] bg-gradient-to-br from-cyan-300 to bg-cyan-500">
-          <h1 className="text-xl lg:text-4xl font-bold mt-1.5">
+          <h1 className="text-2xl lg:text-4xl font-bold mt-1.5">
             Weather App<i className="fa-solid fa-cloud-sun"></i>
           </h1>
           <div className="space-x-1 lg:space-x-2">
             <input
-              className="dark:text-black p-2 mt-2 text-center rounded-2xl w-24 text-xs lg:w-48 lg:text-sm focus:outline-none"
+              className="dark:text-black p-1 lg:p-2 mt-2 text-center rounded-2xl w-24 text-xs lg:w-48 lg:text-sm focus:outline-none"
               type="text"
               name="search"
               value={search}
