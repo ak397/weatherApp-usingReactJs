@@ -1,24 +1,24 @@
-import axios from "axios"//importing axios for api calls
+import axios from "axios" //importing axios for api calls
 import React, { useState, useEffect } from "react"
 import Spinner from "./Spinner"
 import { DateTime } from "luxon"
 import ToggleButton from "./ToggleButton"
 
 const CopyWeatherUpdate = () => {
-  const [search, setSearch] = useState("")//contains value of search query
-  const [searchInput, setSearchInput] = useState("")//stores seach query store
-  const [units, setUnits] = useState("metric")//for storing units like imperial,metric
-  const [tempUnit, setTempUnit] = useState("C")//for celcius and farenhite
+  const [search, setSearch] = useState("") //contains value of search query
+  const [searchInput, setSearchInput] = useState("") //stores seach query store
+  const [units, setUnits] = useState("metric") //for storing units like imperial,metric
+  const [tempUnit, setTempUnit] = useState("C") //for celcius and farenhite
   const [response, setResponse] = useState({
     error: false,
-    loading: false,//spinner laoding false at starting
-    weather: {},//inititalize blank weather
-    forecast: {}
+    loading: false, //spinner laoding false at starting
+    weather: {}, //inititalize blank weather
+    forecast: {},
   })
 
   const fetchWeather = async () => {
-    setSearch("")//set search "" otherwise it shows value of search during fetching
-    setResponse({ ...response, loading: true })//find use of this
+    setSearch("") //set search "" otherwise it shows value of search during fetching
+    setResponse({ ...response, loading: true }) //find use of this
     const weatherHttpRequest = axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&appid=fcc888159eb7a65a948a0afb086dc9de&units=${units}`)
     const ForecastHttpRequest = axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&appid=fcc888159eb7a65a948a0afb086dc9de&units=${units}&cnt=40`)
     axios
@@ -41,7 +41,8 @@ const CopyWeatherUpdate = () => {
   }
 
   const handleDailyWeatherRequestEnterKey = async (e) => {
-    if (e.key === "Enter") {//listen on enter
+    if (e.key === "Enter") {
+      //listen on enter
       fetchWeather()
     }
   }
@@ -55,12 +56,11 @@ const CopyWeatherUpdate = () => {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const currentDate = new Date()
 
-    const date = `${days[currentDate.getDay()]} ${currentDate.getDate()} ${months[currentDate.getMonth()]}, ${currentDate.getHours()} : ${(currentDate.getMinutes()<10?"0" + currentDate.getMinutes() :currentDate.getMinutes()) } `
+    const date = `${days[currentDate.getDay()]} ${currentDate.getDate()} ${months[currentDate.getMonth()]}, ${currentDate.getHours()} : ${currentDate.getMinutes() < 10 ? "0" + currentDate.getMinutes() : currentDate.getMinutes()} `
     return date
   }
-
   const dummyToDay = (nextDay = 1) => {
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const dummyDate = new Date()
     const dummyDay = `${days[dummyDate.getDay() + parseInt(nextDay)]}`
     return dummyDay
@@ -89,7 +89,7 @@ const CopyWeatherUpdate = () => {
   return (
     <>
       <div className="">
-        <div  className="dark:bg-black dark:text-white main w-[90vw] h-[75vh] xsm:w-[90vw] p-2 flex items-center flex-col  m-auto my-2 rounded-md lg:h-[90vh] lg:w-[60vw] bg-gradient-to-br from-cyan-300 to bg-cyan-500">
+        <div className="dark:bg-black dark:text-white main w-[90vw] h-[75vh] xsm:w-[90vw] p-2 flex items-center flex-col  m-auto my-2 rounded-md lg:h-[90vh] lg:w-[60vw] bg-gradient-to-br from-cyan-300 to bg-cyan-500">
           <h1 className="text-2xl lg:text-4xl font-bold mt-1.5">
             Weather App<i className="fa-solid fa-cloud-sun"></i>
           </h1>
@@ -107,11 +107,11 @@ const CopyWeatherUpdate = () => {
               onKeyDown={handleDailyWeatherRequestEnterKey}
             />
             <i className="fa-solid fa-magnifying-glass ease-out transition hover:scale-125 cursor-pointer" onClick={fetchWeather}></i>
-            <ToggleButton/>
+            <ToggleButton />
             <div className="text-[10px] lg:text-[14px] font-semibold inline-block ease-out transition hover:scale-125 cursor-pointer" onClick={handleCelciusClick}>
               °C
             </div>
-            <span> | </span>
+            <span>|</span>
             <span className="text-[10px] lg:text-[14px]   font-semibold inline-block ease-out transition hover:scale-125 cursor-pointer" onClick={handleFarehniteClick}>
               °F
             </span>
@@ -211,70 +211,26 @@ const CopyWeatherUpdate = () => {
               <div className="font-bold text-lg ">Weather Forecast</div>
 
               <div className="outerDiv flex flex-row space-x-2 mt-2">
-                <div className="flex flex-col justify-center items-center">
-                  <span className="text-[9px] lg:text-[14px] font-semibold">{dummyToDay()}</span>
-                  <div className="flex flex-row items-center justify-center lg:mt-[-10px]">
-                    <img className="h-10 w-10 lg:h-20 lg:w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[7].weather[0].icon}@2x.png`} alt="" srcSet="" />
-                    <div className="flex flex-col ">
-                      <p className="text-[10px] lg:text-[14px]">
-                        {response.forecast.list[7].main.temp.toFixed()}°{tempUnit}
-                      </p>
-                      <p className="text-[10px] lg:text-[14px]">{response.forecast.list[7].weather[0].description}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col justify-center items-center">
-                  <span className="text-[9px] lg:text-[14px] font-semibold">{dummyToDay(2)}</span>
-                  <div className="flex flex-row items-center justify-center lg:mt-[-10px]">
-                    <img className="h-10 w-10 lg:h-20 lg:w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[15].weather[0].icon}@2x.png`} alt="" srcSet="" />
-                    <div className="flex flex-col">
-                      <p className="text-[10px] lg:text-[14px]">
-                        {response.forecast.list[15].main.temp.toFixed()}°{tempUnit}
-                      </p>
-                      <p className="text-[10px] lg:text-[14px]">{response.forecast.list[15].weather[0].description}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col justify-center items-center">
-                  <span className="text-[9px] lg:text-[14px] font-semibold">{dummyToDay(3)}</span>
-                  <div className="flex flex-row items-center justify-center lg:mt-[-10px]">
-                    <img className="h-10 w-10 lg:h-20 lg:w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[23].weather[0].icon}@2x.png`} alt="" srcSet="" />
-                    <div className="flex flex-col">
-                      <p className="text-[10px] lg:text-[14px]">
-                        {response.forecast.list[23].main.temp.toFixed()}°{tempUnit}
-                      </p>
-                      <p className="text-[10px] lg:text-[14px]">{response.forecast.list[23].weather[0].description}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col justify-center items-center">
-                  <span className="text-[9px] lg:text-[14px] font-semibold">{dummyToDay(4)}</span>
-                  <div className="flex flex-row items-center justify-center lg:mt-[-10px]">
-                    <img className="h-10 w-10 lg:h-20 lg:w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[31].weather[0].icon}@2x.png`} alt="" srcSet="" />
-                    <div className="flex flex-col">
-                      <p className="text-[10px] lg:text-[14px]">
-                        {response.forecast.list[31].main.temp.toFixed()}°{tempUnit}
-                      </p>
-                      <p className="text-[10px] lg:text-[14px]">{response.forecast.list[31].weather[0].description}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col justify-center items-center">
-                  <span className="text-[9px] lg:text-[14px] font-semibold">{dummyToDay(5)}</span>
-                  <div className="flex flex-row items-center justify-center lg:mt-[-10px]">
-                    <img className="h-10 w-10 lg:h-20 lg:w-20  mx-auto" src={`https://openweathermap.org/img/wn/${response.forecast.list[39].weather[0].icon}@2x.png`} alt="" srcSet="" />
-                    <div className="flex flex-col">
-                      <p className="text-[10px] lg:text-[14px]">
-                        {response.forecast.list[39].main.temp.toFixed()}°{tempUnit}
-                      </p>
-                      <p className="text-[10px] lg:text-[14px]">{response.forecast.list[39].weather[0].description}</p>
-                    </div>
-                  </div>
-                </div>
+                {response.forecast.list
+                  .filter(function (value, index, Arr) {
+                    return index % 8 === 0
+                  })
+                  .map((element, index) => {
+                    return (
+                      <div key={index} className="flex flex-col justify-center items-center">
+                        <span className="text-[9px] lg:text-[14px] font-semibold">{dummyToDay(index)}</span>
+                        <div className="flex flex-row items-center justify-center lg:mt-[-10px]">
+                          <img className="h-10 w-10 lg:h-20 lg:w-20  mx-auto" src={`https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png`} alt="" srcSet="" />
+                          <div className="flex flex-col ">
+                            <p className="text-[10px] lg:text-[14px]">
+                              {element.main.temp.toFixed()}°{tempUnit}
+                            </p>
+                            <p className="text-[10px] lg:text-[14px]">{element.weather[0].description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })}
               </div>
             </>
           )}
